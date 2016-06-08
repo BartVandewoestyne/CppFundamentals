@@ -1,8 +1,10 @@
 Intro
 -----
-* Altran is working on C++17 course (advanced).
-* Next Tuesday C++17 presentatie Altran (Ghelamco arena, Gent)
-* Week van 3rd october: advanced course ?
+* Intelligent Systems/Altran is working on a C++17 course (advanced).
+* Tuesday June 14th, 2016 there is a Chips & Bites session entitled 'Looking
+  ahead to C++17' at the Ghelamco arena in Ghent.
+* In the week from October 3rd, 2016, there will probably be an advanced course
+  for Esterline.
 
 Slide 17
 --------
@@ -151,14 +153,34 @@ Microsoft C++ Core Checker
 Trust In Soft analyzer
   http://trust-in-soft.com/
 
-Opzoeken:
-  * voordeel member initializer lists?
-    => Volgens Ewoud geen voordeel wegens RVO?  Zou zelfde assembler zijn?
-  * CHECK slide 108: worden ze enkel in debug op 0 geinitialiseerd of niet?
-  * Moet je een implementatie voorzien voor een copy constructor die je private
-    maakte?
-  * Zijn er classes zonder destructor?  Kan je hem private maken???  Heeft
-    C++ class echt destructor nodig?
-  * Zijn getters and setters slecht?
-  * Is er gedefinieerd wat operators terug moeten geven?  Of kan je dat
-    kiezen?
+Look this up:
+-------------
+  * What is the advantage of using member initializer lists?
+
+    => According to the instructor, there would not be any performance
+       advantage due to Return Value Optimization.  He thinks the generated
+       assembler will be the same.
+
+  * The variables real and imaginary in the default constructor for Complex()
+    are initialized to zero.  Check if this is only in debug, or also happens
+    in release.
+
+  * Is it necessary to provide an implementation for a copy-constructor that
+    you've made private?
+    => No, see e.g.
+         http://jrdodds.blogs.com/blog/2004/04/disallowing_cop.html
+
+  * Questions on destructors:
+      - Are there classes without destructor?
+        => https://www.quora.com/If-a-write-a-C++-class-without-a-destructor-will-this-mean-that-its-object-will-remain-in-heap-even-if-I-deleted-its-pointer
+      - Is it possible to make the destructor private?
+        => yes, see e.g.
+             http://stackoverflow.com/questions/631783/what-is-the-use-of-having-destructor-as-private
+             http://stackoverflow.com/questions/4920277/private-destructor
+      - Does a C++ class really need a destructor?
+
+
+  * Are getters and setters bad?
+
+  * Does the standard define what the different kinds of operators should
+    return, or are you free to choose that yourself?
