@@ -1,0 +1,164 @@
+Intro
+-----
+* Altran is working on C++17 course (advanced).
+* Next Tuesday C++17 presentatie Altran (Ghelamco arena, Gent)
+* Week van 3rd october: advanced course ?
+
+Slide 17
+--------
+diff between stdlib.h and cstdlib: cstdlib has namespace mechanism
+
+Slide 25
+--------
+Undefined order of evaluation is going to change in C++17.
+
+Slide 28
+--------
+* Reflection is coming (by people from CERN).
+* Java has a better exception handling model?
+
+Slide 35
+--------
+wxWidgets -> less used than Qt?
+
+Slide 38
+--------
+* Secure Coding in C and C++ has website too.
+* Modern C++ Design: do not start with this book, it's rather difficult.
+
+Slide 39
+--------
+* 'C++ Concurrency in action' is a very good book.
+* 'Real-Time C++' is very good for microcontroller programming, as an
+   alternative to C (you have to get used to the book's style of writing
+   code...)  It's a previously unseen style of C++ code writing.
+
+Slide 41
+--------
+C++ FQA is worth looking into, just to change your perception.
+
+Slide 56
+--------
+extern: no storage is allocated (it's storage is defined somewhere else).
+
+Slide 71
+--------
+* References to functions is legal, but not much used, or only used for
+  C-style C++...
+* => is int& a; in de struct geen error? => do it in the initializer list
+* In the future, there will be smart references.
+
+Slide 74
+--------
+"You use a reference as you would use a value."
+
+Slide 81
+--------
+operator . overloading will be possible in the future.
+
+105
+---
+In most of the cases, constructor body should be empty.
+Constructor only serves to initialize the member variables.  Avoid to do
+work in the constructor.
+E.g. do not create SerialPort in a constructor, but pass it as a reference.
+If you create it in the constructor, your instance of your class *always* has
+a SerialPort and its harder to fake.
+Also, ORDER of initialization is important!
+
+107
+---
+Complex(int real, int imaginary) is a 'Domain constructor' (term not often
+used).
+
+108
+---
+value-initialize to zero
+
+Dependency Injection (just a fancy name for 'providing it to the constructor'
+
+113
+---
+better error message with 'delete' instead of making private.
+
+116
+---
+In modern C++ we should write less destructors.
+In modern C++, we use classes that do these things for us.
+
+117
+---
+Examples of resources that can leak: files, sockets, threads, locks,...
+
+120
+---
+  * forget getters and setters?  Do not make them for everything.  Comes
+    from Java.  Make those member variables public.
+    Might be thing of the past.
+    Does the outside need access to it?
+
+129
+---
+Now the operators are members and they only take one argument.
+Advantage: you are allowed to access private data.
+Free standing operators take two.
+
+Difference between operator+ and operator+=
+
+Note the use of const!  Helps you at compile time!
+'const' is a virus: in a const function, you can only call const functions.
+In Rust, everything is const and you need to tell if you want to change it.
+
+131
+---
+Inline must be in header, because you have to know what to inline.
+Same for templates.
+
+137:
+'automatic' means 'automatically managed by the compiler'
+
+139
+The allocators that we have today are not the ones we had 20 years ago.
+But it cannot beat a specific allocator.
+Dynamic allocations can also happen in a better way than the default.
+If you don't do anything special, it will use the default allocator.
+
+140
+Always think about ownership when you pass around pointers!
+new might actually use malloc behind the screens.
+
+143
+---
+For new code, do not use array new anymore.
+There's more than one way to not have to use this anymore.
+
+Exercise 4 Memory is very important!
+
+
+Static code analysis
+--------------------
+Compiler warnings
+Coverity:
+  http://www.coverity.com/
+Klocwork:
+  http://www.klocwork.com/
+clang analyzers (limited in functionality):
+  http://clang-analyzer.llvm.org/
+cppcheck (limited in functionality)
+  http://cppcheck.sourceforge.net/
+Microsoft C++ Core Checker
+  http://www.nuget.org/packages/Microsoft.CppCoreCheck
+Trust In Soft analyzer
+  http://trust-in-soft.com/
+
+Opzoeken:
+  * voordeel member initializer lists?
+    => Volgens Ewoud geen voordeel wegens RVO?  Zou zelfde assembler zijn?
+  * CHECK slide 108: worden ze enkel in debug op 0 geinitialiseerd of niet?
+  * Moet je een implementatie voorzien voor een copy constructor die je private
+    maakte?
+  * Zijn er classes zonder destructor?  Kan je hem private maken???  Heeft
+    C++ class echt destructor nodig?
+  * Zijn getters and setters slecht?
+  * Is er gedefinieerd wat operators terug moeten geven?  Of kan je dat
+    kiezen?

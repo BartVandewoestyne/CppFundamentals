@@ -1,0 +1,113 @@
+Module 2
+--------
+
+Slide 7
+-------
+* is-a has been abused (in an incorrect way) in the past
+* public inheritance means "The world wil also know you, as a Derived, are also a Base."
+
+Slide 14+15
+-----------
+* polymorphism doesn't work if you pass by value?
+
+Slide 18
+--------
+* reference works as well (next to pointer example that is OK)
+
+Slide 22
+--------
+When you are thinking about inheriting from a class, if there is no virtual method in the class you inheriting from, don't inherit from it!
+If it's a concrete base class with virtual, you probably shouldn't inherit from it (composition vs inheritance, has-a vs is-a).
+Prefer composition over inheritance.
+
+Slide 25
+--------
+Do not inherit from more than one concrete object.
+Dreaded Diamond of Doom
+
+Slide 31
+--------
+You cannot ignore/forget exceptions.
+
+Slide 34
+--------
+Having many exception types is a good thing, because then you can catch different exceptions and differentiate between the problems that occur.
+
+Slide 36
+--------
+If exception occurs, the stack will nicely be unwind.  All objects that were created on the stack will get destroyed nicely and correctly.
+Note that there's a price to be paid for this (see 'Technical report on the C++ performance').
+Exceptions don't necessarily have to be slow.
+
+Slide 50
+--------
+Do not throw exceptions in destructors!!!
+Destructors must never fail.
+If an exception is thrown, there is no information on the call stack?
+
+Slide 52
+--------
+Solution was to try to mimick the call stack by adding lots of try/catch blocks and appending strings to the message.
+
+Slide 53
+--------
+Boost::exceptions is apparently good...
+
+Slide 54
+--------
+Best of both worlds: not having to do management, and getting polymorphism: throw by value, catch by reference
+
+Slide 55
+--------
+Do not use this in existing code.  The specifications are not checked.  Untestable, unverifiable, and the standard
+committee asks us to stay away from it.
+* they ask us not to do it
+* it cannot be verified (i can say i don't throw something, but it can throw something), it has no value.
+
+Slide 56
+--------
+From the library, you may safely assume that if you have throw(), that function will not throw an exception.
+
+Slide 58
+--------
+Even if no exceptions are thrown, just enabling them, gives data overhead of 7% (all the error handling code needs
+to be in there, even if it is not used).
+Disablen van exceptions kan je via compiler flag.
+
+Slide 66
+--------
+Don't know why you would do that (use nothrow).
+
+Slide 70
+--------
+Templates always need to go in the header, otherwise it won't compile.
+'class' can be replaced by 'typename'.
+
+Slide 71
+--------
+New style is also better for data locality (data is close together, in old style it isn't).
+
+Slide 73
+--------
+Notice this is type-safe: a linkedlist for int is different from a linkedlist for double.
+
+Vragen:
+-------
+Nice paper:
+  * Technical report on the C++ performance (iso paper written by Stroustrup and a few others)
+    http://www.open-std.org/jtc1/sc22/wg21/docs/TR18015.pdf
+    Gives good glimpse on what the actual cost of certain things (such as virtual function calls) is.
+
+Code review systemen
+
+Als je shared code naar boven trekt, maak je best een extra layer om toch je interface te behouden.  Dat is beter
+naar testabililty toe.  Anders sleur je dat stuk gedeelde code mee in je testen.
+
+CHECK
+-----
+* Operatores aren't inherited, operators don't have virtual??? (check), operators don't work well with polymorphism
+* polymorphism doesn't work if you pass by value?
+* Wat als je de constructor van de parent niet oproept?  gebruikt hij dan de default one?
+  http://stackoverflow.com/questions/4360938/what-happens-if-you-dont-call-the-base-constructor-from-the-derived-constructor
+* What happens to the partly constructed object if you throw an exception in the constructor. => smart pointers is good
+* Try to view the call stack in a catch clause with your debugger.
