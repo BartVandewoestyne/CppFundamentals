@@ -1,0 +1,81 @@
+Slide 6
+-------
+You need to add the class name.
+Now you also need to take the address.
+We don't use function pointers in C++, there are other things.
+
+Some people are anty-typedef, but there are lots of useful usecases.
+
+Slide 8
+-------
+You don't see this very often, it's very rare to use it like that.
+
+Slide 14
+--------
+Boost and Google test are better than CppUnit
+Qt testing framework is more about testing with signals and slots.
+
+Slide 16
+--------
+Note that you are testing both the constructor and the equality operator.
+Usually, you write a test for your constructor first.
+It's an art to design your tests in such a way that you don't have to look to hard in your code to find the reason why a test fails.
+
+Instructor thinks friend is a code smell, but there are cases where it is allowed, e.g. unit tests.
+
+Slide 23
+--------
+You could also use value-types, but then in your setup you are using the assignment operator and that would already have to be correct.
+
+Slide 32
+--------
+We need to pass in function pointers.  It is not used often, but here it makes sense.
+
+Slide 34
+--------
+Note that you are passing the pointer.
+You assume that within the run method, they don't take ownership of the pointer and delete it.
+Ownership issues!  They sneak up on you!
+
+Visual Studio has Boost,... available as packages in NuGet
+
+Slide 37
+--------
+Friend is a bypass around private and protected.
+Avoid using friend!
+It introduces hard coupling between to classes, because you don't pass through an interface.
+Do not use friendness, except maybe for:
+  * Testing: testclass that is friend (is better than exposing too much to your user).
+  * Factories: If you want to use factories, make constructors private, and factory ... friend, so it can create it.
+  * Operators: Sometimes you are forced to implement some operators as friend.
+You can make functions friend too.
+
+Slides on testable design
+-------------------------
+MonkeyPatching or Guerilla patching
+
+Stub: does not do anything special
+Mock: more advanced than stub, with some logic, to check some stuff,...
+  -> keeps track of which methods on the mock are called how many times and with what parameters
+
+Slides on mocking
+-----------------
+Unity = framework to test C code, has good mocking framework
+Check or Unity framework for unit testing C code
+CMock, CMocka, Cgreen = mocking frameworks
+  throwtheswitch.org
+  cmocka.org
+  cgreen.sourceforge.net
+
+Slides on coding guidelines
+---------------------------
+F35 C++ Coding Guidelines
+Good illustration of things that can go wrong with C++
+NASA, CERN, Google,... have coding guidelines
+
+no virtual functions in constructor or destructor: because the virtual mechanism does not work on a partially constructed or destructed object.
+
+Can you pass a[100] to an a[99]?
+
+Magic Decoder Ring for C Declarations 
+Expert C Programming: Deep C Secrets

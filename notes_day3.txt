@@ -1,0 +1,44 @@
+Slide 76
+--------
+* Policy Classes (Alexander Andrescu)
+
+Slide 77
+--------
+Write templates in header files.
+Adapter Design pattern is a useful one.
+
+Slide 85
+--------
+This is a rather naive implementation, but shows the concept.
+Interface of atomics is standardized.  How it's implemented depends on the
+platform.
+
+Slide 91
+--------
+Should you initialize pointee() with NULL?  Debug vs release?  Is there a bug
+in there?
+
+Slide 92
+--------
+Inheritance is protected.
+Should it be rewritten using composition?  Maybe... it's a discussion.
+You could also do the reference counting in the SmartPointer class.  It's
+a design decision to decouple the reference counting from the deleting.
+
+The virtual is not really necessary to make the ReferenceCounter destructor
+be called after the SmartPointer destructor.  Even without virtual, the
+same would happen.  You need the virtual keyword on the destructor if you
+want to call the destructor using a base class pointer?
+
+Slide 105 - 106
+---------------
+To implement: all you need to do is forward the operator to your naked pointer.
+Comparing them is also just forwarding to your naked pointer.
+
+Slide 111
+---------
+Disadvantage of poor man's namespace: harder to switch implementation (e.g. boost::shared_ptr and std::shared_ptr).
+
+Namespace guideline:
+  - one namespace for esterline
+  - then maybe one or two levels deeper (per logical block of code)

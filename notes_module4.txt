@@ -1,0 +1,16 @@
+Slide 12
+--------
+* bmw takes twice the time, because you have to try them all
+
+Slide 13
+--------
+double dispatching problem
+Visitor design pattern is some kind of double callback (accept & visit)
+(accept me as a visitor and visit me back)
+
+casting away const might be done in a special layer, quite low, close to where you use
+the library where const is required
+
+Slide 16
+--------
+lexical_cast is not standardized, but boost has it
